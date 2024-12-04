@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme - Enhanced contrast */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 210 100% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 5.9% 90%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 40%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 210 100% 45%;
+  }
+
+  .dark {
+    /* Dark theme - Kept as is */
+    --background: 230 25% 3%;
+    --foreground: 210 40% 98%;
+    --card: 230 25% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 230 25% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 100% 70%;
+    --primary-foreground: 230 25% 5%;
+    --secondary: 280 85% 70%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 230 25% 12%;
+    --muted-foreground: 210 20% 85%;
+    --accent: 190 95% 50%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 100% 70%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 230 25% 15%;
+    --input: 230 25% 15%;
+    --ring: 210 100% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Navigation Styles */
+.nav-section-header {
+  @apply flex items-center gap-2 px-3 py-2 text-sm font-semibold;
+  background: linear-gradient(
+    to right,
+    hsl(var(--secondary) / 0.3),
+    hsl(var(--secondary) / 0.1)
+  );
+  border: 1px solid hsl(var(--border) / 0.2);
+  border-radius: var(--radius);
+  color: hsl(var(--primary));
+  text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  box-shadow: 
+    0 4px 12px -6px hsl(var(--secondary) / 0.5),
+    0 0 0 1px hsl(var(--border) / 0.2);
+}
+
+.nav-section-header svg {
+  @apply opacity-90;
+  filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.5));
+}
+
+.nav-link {
+  @apply flex items-center gap-x-2 p-2 rounded-lg transition-all duration-200;
+  position: relative;
+  overflow: visible;
+  background: hsl(var(--background) / 0.5);
+  color: hsl(var(--foreground) / 0.8);
+}
+
+.nav-link:hover {
+  @apply bg-secondary/40;
+  color: hsl(var(--foreground));
+  box-shadow: 0 0 12px -3px hsl(var(--primary) / 0.3);
+}
+
+.nav-link.active {
+  @apply bg-secondary/50;
+  color: hsl(var(--primary));
+  box-shadow: 
+    0 0 12px -3px hsl(var(--primary) / 0.5),
+    0 0 0 1px hsl(var(--border) / 0.3);
+}
+
+.nav-link.active svg {
+  @apply text-primary;
+  filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.5));
+}
+
+.glass-panel {
+  @apply bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/75;
+  box-shadow: 
+    0 4px 24px -6px hsl(var(--primary) / 0.2),
+    0 2px 12px -2px hsl(var(--background));
+}
+
+.app-title {
+  @apply text-primary font-semibold text-lg;
+  text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+}
+
+.page-title {
+  @apply text-primary/90 font-semibold text-xl;
+  text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+}
+
+/* Navigation tooltips */
+.nav-link .tooltip {
+  @apply invisible opacity-0 fixed px-2 py-1 text-xs 
+    bg-popover text-popover-foreground rounded-md transition-all duration-200;
+  left: 240px; /* Width of the sidebar */
+  transform: translateY(-50%);
+  white-space: nowrap;
+  box-shadow: 
+    0 4px 12px -2px hsl(var(--background) / 0.7),
+    0 0 0 1px hsl(var(--border) / 0.2);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.nav-link:hover .tooltip {
+  @apply visible opacity-100;
+}
+
+/* Card and content enhancements */
+.card {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--card) / 0.95),
+    hsl(var(--card) / 0.9)
+  );
+  box-shadow: 
+    0 4px 24px -6px hsl(var(--background)),
+    0 2px 12px -2px hsl(var(--primary) / 0.1);
+}
+
+pre {
+  background: hsl(var(--muted) / 0.9);
+  border: 1px solid hsl(var(--border) / 0.2);
+  box-shadow: inset 0 2px 4px hsl(var(--background) / 0.5);
+}
+
+table {
+  background: hsl(var(--card) / 0.7);
+}
+
+tr:hover {
+  background: hsl(var(--muted) / 0.4);
+}
+
+th {
+  background: hsl(var(--muted) / 0.6);
+}
+
+/* Select and dropdown enhancements */
+[cmdk-input] {
+  background: hsl(var(--muted) / 0.9) !important;
+}
+
+.select-trigger {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border) / 0.3) !important;
+}
+
+.select-content {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border) / 0.3) !important;
+}
+
+.select-item {
+  color: hsl(var(--foreground)) !important;
+}
+
+.select-item:hover {
+  background: hsl(var(--muted)) !important;
+}
+
+.select-item[data-highlighted] {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Form inputs and buttons */
+input, select, textarea {
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border) / 0.3) !important;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  border-color: hsl(var(--primary) / 0.5) !important;
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2) !important;
+}
+
+/* Button enhancements */
+.button-primary {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.9)
+  ) !important;
+  box-shadow: 
+    0 2px 4px -1px hsl(var(--primary) / 0.2),
+    0 1px 2px -1px hsl(var(--primary) / 0.1) !important;
+}
+
+.button-secondary {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--secondary)),
+    hsl(var(--secondary) / 0.9)
+  ) !important;
+  box-shadow: 
+    0 2px 4px -1px hsl(var(--secondary) / 0.2),
+    0 1px 2px -1px hsl(var(--secondary) / 0.1) !important;
+}
